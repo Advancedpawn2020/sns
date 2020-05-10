@@ -47,7 +47,7 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-<!--    &lt;!&ndash;声明了依赖可以从哪些仓库来获取&ndash;&gt;
+    <!--声明了依赖可以从哪些仓库来获取-->
     <repositories>
         <repository>
             <id>spring-snapshots</id>
@@ -83,6 +83,6 @@
                 <enabled>false</enabled>
             </snapshots>
         </pluginRepository>
-    </pluginRepositories>-->
+    </pluginRepositories>
 
 </project>
