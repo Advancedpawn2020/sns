@@ -3,6 +3,7 @@ package com.zrkworld.sns.article.service;
 import com.baomidou.mybatisplus.core.conditions.AbstractWrapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 import com.zrkworld.sns.article.mapper.ArticleMapper;
@@ -77,12 +78,9 @@ public class ArticleService {
         QueryWrapper<Article> wrapper = new QueryWrapper<>();
         Set<String> keySet = map.keySet();
         for (String key : keySet) {
-            // if (map.get(key) != null) {
-            //     wrapper.eq(key, map.get(key));
-            // }
 
             //第一个参数是否把后面的条件加入到查询条件中
-            //和上面的if判断的写法是一样的效果，实现动态sql
+            //eq方法有两个重载版本，区别是是否有第一个boolean，用来实现动态sql
 
             wrapper.eq(map.get(key) != null, key, map.get(key));
         }
@@ -91,10 +89,15 @@ public class ArticleService {
         Page<Article> pageData = new Page<>(page, size);
 
         //执行查询
+        /**
+         * 3.x 的 page 可以进行取值,多个入参记得加上注解
+         * 自定义 page 类必须放在入参第一位
+         * 返回值可以用 IPage<T> 接收 也可以使用入参的 MyPage<T> 接收
+         */
         //第一个是分页参数，第二个是查询条件
-        List<Article> list = articleMapper.selectPage(pageData, wrapper);
+        IPage<Article> iPage = articleMapper.selectPage(pageData, wrapper);
 
-        pageData.setRecords(list);
+        pageData.setRecords(iPage.getRecords());
 
         //返回
         return pageData;

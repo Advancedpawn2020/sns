@@ -35,7 +35,7 @@ public class ArticleController {
     // POST /article/search/{page}/{size} 文章分页
     @RequestMapping(value = "search/{page}/{size}", method = RequestMethod.POST)
     //之前接受文章数据，使用pojo，但是现在根据条件查询
-    //而所有的条件都需要进行判断，遍历pojo的所有属性需要使用反射的方式，成本较高，性能较低
+    //而所有的条件都需要进行判断，遍历pojo的所有属性需要使用反射的方式，成本较高，性能较低（遍历所有属性有三个方法，1用if一个一个判断，2用反射循环判断，3用map循环判断）
     //直接使用集合的方式遍历，这里接受数据改为Map集合
     public Result findByPage(@PathVariable Integer page,
                              @PathVariable Integer size,
