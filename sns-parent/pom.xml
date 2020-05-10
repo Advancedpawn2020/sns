@@ -6,7 +6,11 @@
 
     <groupId>com.zrkworld.sns</groupId>
     <artifactId>sns-parent</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>../sns-common</module>
+    </modules>
 
     <parent><!--父工程继承了springboot-parent，其他工程可以省略-->
         <groupId>org.springframework.boot</groupId>
@@ -42,7 +46,7 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    <!--声明了依赖可以从哪些仓库来获取-->
+<!--    &lt;!&ndash;声明了依赖可以从哪些仓库来获取&ndash;&gt;
     <repositories>
         <repository>
             <id>spring-snapshots</id>
@@ -78,6 +82,6 @@
                 <enabled>false</enabled>
             </snapshots>
         </pluginRepository>
-    </pluginRepositories>
+    </pluginRepositories>-->
 
 </project>
