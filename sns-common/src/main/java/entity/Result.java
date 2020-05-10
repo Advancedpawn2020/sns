@@ -4,6 +4,7 @@ package entity;
  * @author zrk
  * @version 1.0
  * @date 2020/5/10 0010 17:56
+ * 根据接口文档，编写返回的类
  */
 public class Result {
     private Boolean flag;
