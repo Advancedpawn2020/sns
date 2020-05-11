@@ -19,6 +19,8 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("article")
+//解决跨域注解
+@CrossOrigin
 public class ArticleController {
 
     @Autowired

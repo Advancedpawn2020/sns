@@ -8,6 +8,12 @@ spring:
     url: jdbc:mysql://192.168.25.133:3306/sns_article?characterEncoding=utf-8
     username: root
     password: root
+  data: #整合mongodb的配置
+    mongodb:
+      database: commentdb
+      host: 192.168.25.133
+  redis:
+    host: 192.168.25.133
 
 #mybatis-plus:
 #  #  mapper-locations: classpath:/mapper/*Mapper.xml

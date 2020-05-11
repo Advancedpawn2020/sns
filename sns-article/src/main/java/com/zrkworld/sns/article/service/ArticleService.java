@@ -28,14 +28,13 @@ import java.util.Set;
 @Service
 public class ArticleService {
 
-    @Autowired
+    @Resource
     private ArticleMapper articleMapper;
 
-    @Autowired
+    @Resource
     private IdWorker idWorker;
 
     public List<Article> findAll() {
-        Article article = articleMapper.selectById(1);
         return articleMapper.selectList(null);
     }
 
