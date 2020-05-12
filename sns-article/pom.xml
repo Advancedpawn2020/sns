@@ -9,13 +9,14 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.zrkworld.com</groupId>
+    <groupId>com.zrkworld</groupId>
     <artifactId>sns-article</artifactId>
     <dependencies>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.zrkworld.sns</groupId>
             <artifactId>sns-common</artifactId>
@@ -37,6 +38,13 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
         <!-- mybatis-plus end -->
+        <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-netflix-eureka-client -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <version>2.2.2.RELEASE</version>
+        </dependency>
+
     </dependencies>
 
 </project>

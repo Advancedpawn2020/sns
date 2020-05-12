@@ -31,6 +31,9 @@
 						<button id="login" type="button" class="btn btn-primary">登录</button>
 					</div>
             </div>
+            <div class="panel-body">
+                <input type="text" class="form-control" id="toUserId" placeholder="接收消息的用户id"/><br>
+            </div>
             <div class="panel panel-primary" id="online">
                 <div class="panel-heading">
                     <h3 class="panel-title">当前在线的其他用户</h3>
@@ -100,7 +103,7 @@
         },         //连接关闭回调
         onTextMessage: function (message) {
             console.log('onTextMessage: ', message);
-
+            $("#log-container").append("<div class='bg-success'><label class='text-info'>"+nickname+"：</label><div class='text-info'>"+message.data+"</div></div><br>");        console.log(msg);
 
         },
     })//收到文本消息
@@ -145,12 +148,19 @@
     //登录
     document.getElementById('login').onclick = function () {
         console.log(WebIM, window.WebIM);
-        var uname = document.getElementById("name").value;
-        var upwd = document.getElementById("pwd").value;
+        userId = document.getElementById("userId").value;
+        //设置ajax是同步的，需要先获取用户数据再注册
+        $.ajaxSettings.async = false;
+        //使用ajax获取数据
+        $.get("/user/"+userId,function(data){
+            nickname = data.data.nickname;
+            password = data.data.password;
+        });
         options = {
             apiUrl: WebIM.config.apiURL,
-            user: uname,
-            pwd: upwd,
+            user: userId,
+            pwd: password,
+            nickname:nickname,
             appKey: WebIM.config.appkey
         };
         conn.open(options);
@@ -161,6 +171,44 @@
     // document.getElementById("logout").onclick = function () {
     //     conn.close();
     // }
+
+    //文本消息
+    var conf = WebIM.config
+    //var WebIM = WebIM.default
+    WebIM.config = conf
+    WebIM.message = WebIM.default.message
+    WebIM.utils = WebIM.default.utils
+    WebIM.debug = WebIM.default.debug
+    WebIM.statusCode = WebIM.default.statusCode
+
+    var myDate = new Date().toLocaleString();
+    document.getElementById('send').onclick = function () {
+       // var uname = document.getElementById("name").value;
+        var tname = document.getElementById("toUserId").value;
+        var tmsg = document.getElementById("myinfo").value;
+        var id = conn.getUniqueId();                 // 生成本地消息id
+        var msg = new WebIM.default.message('txt', id);      // 创建文本消息
+        msg.set({
+            msg: tmsg,                  // 消息内容
+            to: tname,
+            ext: {
+                'time': myDate
+            },                       // 接收消息对象（用户id）
+            success: function (id, serverMsgId) {
+                console.log('send private text Success');
+                msgText = msg.body.msg;
+            },
+            fail: function (e) {
+                console.log("Send private text error");
+            }
+        });
+        msg.body.chatType = 'singleChat';
+        conn.send(msg.body);
+        //在聊天信息框显示聊天信息
+        $("#log-container").append("<div class='bg-success'><label class='text-info'>我&nbsp;"+new Date()+"</label><div class='text-info'>"+tmsg+"</div></div><br>");        console.log(msg);
+
+    };
+
 </script>
 
 </body>

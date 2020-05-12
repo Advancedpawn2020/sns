@@ -12,6 +12,7 @@
         <module>../sns-common</module>
         <module>../sns-article</module>
         <module>../sns-user</module>
+        <module>../sns-encrypt</module>
     </modules>
 
     <parent><!--父工程继承了springboot-parent，其他工程可以省略-->
@@ -47,7 +48,19 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Greenwich.SR1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <!--声明了依赖可以从哪些仓库来获取-->
     <repositories>
         <repository>
