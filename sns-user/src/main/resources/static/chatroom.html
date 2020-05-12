@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="edge" />
+    <title>聊天室</title>
+    <script src="./js/jquery-1.12.3.min.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            margin-top: 5px;
+        }
+    </style>
+
+	<script src="./WebIMConfig.js"></script>
+	<script src="../sdk/webimSDK3.0.6.js"></script>
+	<script src="../sdk/EMedia_x1v1.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">用户注册或登录环信im</h3>
+                </div>
+					<div class="panel-body">
+						<input type="text" class="form-control" id="userId" placeholder="用户id"/><br>
+						<button id="reg" type="button" class="btn btn-primary">注册</button>
+						<button id="login" type="button" class="btn btn-primary">登录</button>
+					</div>
+            </div>
+            <div class="panel panel-primary" id="online">
+                <div class="panel-heading">
+                    <h3 class="panel-title">当前在线的其他用户</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="list-group" id="users">
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">群发系统广播</h3>
+                </div>
+                <div class="panel-body">
+                    <input type="text" class="form-control" id="msg"/><br>
+                    <button id="broadcast" type="button" class="btn btn-primary">发送</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="talktitle"></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="well" id="log-container" style="height:400px;overflow-y:scroll">
+
+                    </div>
+                    <input type="text" id="myinfo" class="form-control col-md-12"/> <br>
+                    <button id="send" type="button" class="btn btn-primary">发送</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var conn = {};
+    console.log(WebIM, window.WebIM);
+    WebIM.config = config;
+    conn = WebIM.conn = new WebIM.default.connection({
+        appKey: WebIM.config.appkey,
+        isHttpDNS: WebIM.config.isHttpDNS,
+        isMultiLoginSessions: WebIM.config.isMultiLoginSessions,
+        host: WebIM.config.Host,
+        https: WebIM.config.https,
+        url: WebIM.config.xmppURL,
+        apiUrl: WebIM.config.apiURL,
+        isAutoLogin: false,
+        heartBeatWait: WebIM.config.heartBeatWait,
+        autoReconnectNumMax: WebIM.config.autoReconnectNumMax,
+        autoReconnectInterval: WebIM.config.autoReconnectInterval,
+        isStropheLog: WebIM.config.isStropheLog,
+        delivery: WebIM.config.delivery
+    })
+    //回调方法，收到消息使用
+    conn.listen({
+        onOpened: function (message) {          //连接成功回调
+            var myDate = new Date().toLocaleString();
+            console.log("%c [opened] 连接已成功建立", "color: green");
+            console.log(myDate);
+            // rek();
+            // alert(myDate + "登陆成功")
+        },
+        onClosed: function (message) {
+            console.log("onclose:" + message);
+            console.log(error);
+        },         //连接关闭回调
+        onTextMessage: function (message) {
+            console.log('onTextMessage: ', message);
+
+
+        },
+    })//收到文本消息
+
+    //注册
+    //本案例测试使用用户id即可完成注册和登录
+    //在实际开发中不是用手点击来实现注册和登录，而是页面跳转后自动完成(这里的注册和登录是指im平台)
+    let userId;
+    let nickname;
+    let password;
+    document.getElementById('reg').onclick = function () {
+
+        userId = document.getElementById("userId").value;
+        //设置ajax是同步的，需要先获取用户数据再注册
+        $.ajaxSettings.async = false;
+        //使用ajax获取数据
+        $.get("/user/"+userId,function(data){
+           nickname = data.data.nickname;
+           password = data.data.password;
+        });
+        // alert(nickname);
+        // alert(password);
+        var option = {
+            //用户id
+            username: userId,
+            //用户密码
+            password: password,
+            //用户昵称
+            nickname:nickname,
+            appKey: WebIM.config.appkey,
+            success: function () {
+                console.log('注册成功');
+            },
+            error: function () {
+                console.log('注册失败');
+            },
+            apiUrl: WebIM.config.apiURL
+        };
+        conn.signup(option);
+    };
+
+    //登录
+    document.getElementById('login').onclick = function () {
+        console.log(WebIM, window.WebIM);
+        var uname = document.getElementById("name").value;
+        var upwd = document.getElementById("pwd").value;
+        options = {
+            apiUrl: WebIM.config.apiURL,
+            user: uname,
+            pwd: upwd,
+            appKey: WebIM.config.appkey
+        };
+        conn.open(options);
+        console.log(options)
+    };
+
+    //退出
+    // document.getElementById("logout").onclick = function () {
+    //     conn.close();
+    // }
+</script>
+
+</body>
+</html>

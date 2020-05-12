@@ -2,7 +2,6 @@ package com.zrkworld.sns.article.repository;
 import com.zrkworld.sns.article.pojo.Comment;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import java.util.Date;
 import java.util.List;
 
 /**

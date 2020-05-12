@@ -5,7 +5,6 @@ import com.zrkworld.sns.article.pojo.Comment;
 import com.zrkworld.sns.article.service.CommentService;
 import entity.Result;
 import entity.StatusCode;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +35,7 @@ public class CommentController {
         //每次点赞之前，先查询用户点赞信息
         //如果没有点赞信息，用户可以点赞
         //如果有点赞信息，用户不能重复点赞
+        //也可以换成，重复点赞时去掉赞
 
         //模拟用户id
         String userId = "123";
