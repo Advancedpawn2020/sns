@@ -19,7 +19,6 @@ public class EncryptTest {
     @Before
     public void before() throws Exception{
     }
-
     @After
     public void after() throws Exception {
     }
