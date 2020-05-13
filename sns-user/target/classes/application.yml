@@ -25,7 +25,7 @@ spring:
 #      db-type: mysql
 #      refresh-mapper: true
 #  configuration:
-#    map-underscore-to-camel-case: true
+#    map-underscore-to-camel-case: false #取消将驼峰命名改为下划线字段名
 #    cache-enabled: true #配置的缓存的全局开关
 #    lazyLoadingEnabled: true #延时加载的开关
 #    multipleResultSetsEnabled: true #开启延时加载，否则按需加载属性
@@ -43,7 +43,7 @@ mybatis-plus:
     #驼峰下划线转换
     column-underline: true
     configuration:
-      map-underscore-to-camel-case: true
+      map-underscore-to-camel-case: false #取消将驼峰命名改为下划线字段名
       cache-enabled: true #配置的缓存的全局开关
       lazyLoadingEnabled: true #延时加载的开关
       multipleResultSetsEnabled: true #开启延时加载，否则按需加载属性
