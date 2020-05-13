@@ -6,6 +6,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 import com.zrkworld.sns.article.mapper.ArticleMapper;
 import com.zrkworld.sns.article.pojo.Article;
+import jdk.nashorn.internal.ir.CallNode;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import util.IdWorker;
 
@@ -22,6 +25,8 @@ import java.util.Set;
 @Service
 public class ArticleService {
 
+    @Autowired
+    private RedisTemplate redisTemplate;
     @Resource
     private ArticleMapper articleMapper;
 
@@ -94,5 +99,30 @@ public class ArticleService {
 
         //返回
         return pageData;
+    }
+
+    public boolean subscribe(String articleId, String userId) {
+        //根据文章id查询作者id
+        String authorId = articleMapper.selectById(articleId).getUserid();
+
+        //存放用户订阅的集合key,存放作者id
+        String userKey = "article_subscribe_"+userId;
+        //存放作者粉丝的集合key,里面存放用户id
+        String authorKey = "article_author_" + authorId;
+        //查询用户的订阅关系,是否有订阅该作者
+        Boolean flag = redisTemplate.boundSetOps(userKey).isMember(authorId);
+        if(flag==true) {
+            //如果订阅了,就取消订阅
+        redisTemplate.boundSetOps(userKey).remove(authorId);
+        redisTemplate.boundSetOps(authorKey).remove(userId);
+
+        return false;
+        }else {
+            //没有订阅就进行订阅
+            redisTemplate.boundSetOps(userKey).add(authorId);
+            redisTemplate.boundSetOps(authorKey).add(userId);
+            return true;
+
+        }
     }
 }

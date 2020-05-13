@@ -18,7 +18,7 @@ public class Notice implements Serializable {
 	private String receiverId;//接收消息的用户ID
 	private String operatorId;//进行操作的用户ID
 
-	@TableField(exist = false)
+	@TableField(exist = false)//表示该字段在表中不存在，需要此字段时从别的数据库多表查询在放进来
 	private String operatorName;//进行操作的用户昵称
 	private String action;//操作类型（评论，点赞等）
 	private String targetType;//对象类型（评论，点赞等）

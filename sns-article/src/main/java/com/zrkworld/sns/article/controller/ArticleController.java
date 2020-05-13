@@ -26,6 +26,19 @@ public class ArticleController {
     @Autowired
     private ArticleService articleService;
 
+    //根据文章id和用户id,建立订阅关系,保存的是该文章作者的id和用户id
+    //http:127.0.0.1:9004/article/subscribe post
+    @RequestMapping(value = "subscribe", method = RequestMethod.POST)
+    public Result subscribe(@RequestBody Map map){
+        //返回一个状态,如果返回true就是订阅该文章作者,如果false就是取消订阅
+        boolean flag = articleService.subscribe(map.get("articleId").toString(),map.get("userId").toString());
+        //判断是订阅还是取消订阅
+        if(flag == true) {
+            return new Result(true, StatusCode.OK, "订阅成功");
+        }else{
+            return new Result(true,StatusCode.OK,"取消订阅成功");
+        }
+    }
     //测试公共异常处理
     @RequestMapping(value = "exception", method = RequestMethod.GET)
     public Result test() {

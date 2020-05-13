@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient("tensquare-user")
+@FeignClient("sns-user")
 public interface UserClient {
 
     //根据用户id查询用户

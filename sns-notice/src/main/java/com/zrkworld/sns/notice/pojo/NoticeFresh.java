@@ -1,6 +1,7 @@
 package com.zrkworld.sns.notice.pojo;
 
-import com.baomidou.mybatisplus.annotations.TableName;
+
+import com.baomidou.mybatisplus.annotation.TableName;
 
 @TableName("tb_notice_fresh")
 public class NoticeFresh {
