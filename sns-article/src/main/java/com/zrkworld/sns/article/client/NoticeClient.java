@@ -1,6 +1,6 @@
 package com.zrkworld.sns.article.client;
 
-import com.mysql.cj.protocol.x.Notice;
+import com.zrkworld.sns.article.pojo.Notice;
 import entity.Result;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;

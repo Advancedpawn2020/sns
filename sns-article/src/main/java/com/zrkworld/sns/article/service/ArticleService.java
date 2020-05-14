@@ -4,8 +4,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
+import com.zrkworld.sns.article.client.NoticeClient;
 import com.zrkworld.sns.article.mapper.ArticleMapper;
 import com.zrkworld.sns.article.pojo.Article;
+import com.zrkworld.sns.article.pojo.Notice;
 import jdk.nashorn.internal.ir.CallNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -29,6 +31,8 @@ public class ArticleService {
     private RedisTemplate redisTemplate;
     @Resource
     private ArticleMapper articleMapper;
+    @Autowired
+    private NoticeClient noticeClient;
 
     @Resource
     private IdWorker idWorker;
@@ -42,6 +46,10 @@ public class ArticleService {
     }
 
     public void save(Article article) {
+        //TODO: 使用jwt鉴权获取当前用户的信息，用户id，也就是文章作者id
+        String userId = "3";
+        article.setUserid(userId);
+
         //使用分布式id生成器
         String id = idWorker.nextId() + "";
         article.setId(id);
@@ -53,6 +61,37 @@ public class ArticleService {
 
         //新增
         articleMapper.insert(article);
+
+        //新增文章后，创建消息，通知给订阅者
+
+
+        //获取订阅者信息
+        //存放作者订阅者信息的集合key，里面存放订阅者id
+        String authorKey = "article_author_" + userId;
+        Set<String> set = redisTemplate.boundSetOps(authorKey).members();
+        Notice notice = null;
+        // 给订阅者创建消息通知
+        for (String uid : set) {
+            // 创建消息对象
+            notice = new Notice();
+
+            // 接收消息用户的ID
+            notice.setReceiverId(uid);
+            // 进行操作用户的ID
+            notice.setOperatorId(userId);
+            // 操作类型（评论，点赞等）
+            notice.setAction("publish");
+            // 被操作的对象，例如文章，评论等
+            notice.setTargetType("article");
+            // 被操作对象的id，例如文章的id，评论的id'
+            notice.setTargetId(id);
+            // 通知类型
+            notice.setType("sys");
+
+            noticeClient.save(notice);
+        }
+
+
     }
 
     public void updateById(Article article) {
@@ -124,5 +163,32 @@ public class ArticleService {
             return true;
 
         }
+    }
+
+
+
+    //文章点赞
+    public void thumpup(String articleId, String userId) {
+        Article article = articleMapper.selectById(articleId);
+        article.setThumbup(article.getThumbup() + 1);
+        articleMapper.updateById(article);
+
+        //点赞成功后，需要发送消息给文章作者（点对点消息）
+        Notice notice = new Notice();
+        // 接收消息用户的ID
+        notice.setReceiverId(article.getUserid());
+        // 进行操作用户的ID
+        notice.setOperatorId(userId);
+        // 操作类型（评论，点赞等）
+        notice.setAction("publish");
+        // 被操作的对象，例如文章，评论等
+        notice.setTargetType("article");
+        // 被操作对象的id，例如文章的id，评论的id'
+        notice.setTargetId(articleId);
+        // 通知类型
+        notice.setType("user");
+
+        //保存消息
+        noticeClient.save(notice);
     }
 }
