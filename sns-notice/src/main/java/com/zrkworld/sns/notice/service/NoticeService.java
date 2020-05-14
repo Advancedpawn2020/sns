@@ -92,11 +92,11 @@ public class NoticeService {
         notice.setId(id);
         noticeMapper.insert(notice);
 
-        //待推送消息入库，新消息提醒
-        NoticeFresh noticeFresh = new NoticeFresh();
-        noticeFresh.setNoticeId(id);//消息id
-        noticeFresh.setUserId(notice.getReceiverId());//待通知用户的id
-        noticeFreshMapper.insert(noticeFresh);
+        //待推送消息入库，新消息提醒,这里交给rabbitMQ来处理了
+//        NoticeFresh noticeFresh = new NoticeFresh();
+//        noticeFresh.setNoticeId(id);//消息id
+//        noticeFresh.setUserId(notice.getReceiverId());//待通知用户的id
+//        noticeFreshMapper.insert(noticeFresh);
     }
 
     public void updateById(Notice notice) {

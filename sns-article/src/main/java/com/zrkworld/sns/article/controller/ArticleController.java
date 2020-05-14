@@ -8,6 +8,7 @@ import entity.Result;
 import entity.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,6 +41,8 @@ public class ArticleController {
 
         //查询用户对文章的点赞信息，根据用户id和文章id
         String key = "thumbup_article_" + userId + "_" + articleId;
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+
         Object flag = redisTemplate.opsForValue().get(key);
 
         //判断查询到的结果是否为空

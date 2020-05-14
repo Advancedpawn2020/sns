@@ -14,7 +14,8 @@ spring:
       host: 192.168.25.133
   redis:
     host: 192.168.25.133
-
+  rabbitmq:
+    host: 192.168.25.133
 #mybatis-plus:
 #  #  mapper-locations: classpath:/mapper/*Mapper.xml
 #  #实体扫描，多个package用逗号或者分号分隔

@@ -7,6 +7,7 @@ import entity.Result;
 import entity.StatusCode;
 
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -39,7 +40,7 @@ public class CommentController {
 
         //模拟用户id
         String userId = "123";
-
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
         //查询用户点赞信息，根据用户id和评论id
         Object flag = redisTemplate.opsForValue().get("thumbup_" + userId + "_" + commentId);
 

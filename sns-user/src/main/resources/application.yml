@@ -2,7 +2,7 @@ server:
   port: 9008 #服务访问端口号
 spring:
   application:
-    name: sns-article #服务名称
+    name: sns-user #服务名称
   datasource:
     driver-class-name: com.mysql.jdbc.Driver #服务连接的属性
     url: jdbc:mysql://192.168.25.133:3306/sns_user?characterEncoding=utf-8
@@ -48,3 +48,9 @@ mybatis-plus:
     lazyLoadingEnabled: true #延时加载的开关
     multipleResultSetsEnabled: true #开启延时加载，否则按需加载属性
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #打印sql语句,调试用
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:6868/eureka/
+  instance:
+    prefer-ip-address: true
