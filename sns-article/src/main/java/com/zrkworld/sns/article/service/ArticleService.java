@@ -229,5 +229,18 @@ public class ArticleService {
 
         //保存消息
         noticeClient.save(notice);
+
+
+        //1 创建Rabbit管理器
+        RabbitAdmin rabbitAdmin = new RabbitAdmin(rabbitTemplate.getConnectionFactory());
+
+        //2 创建队列，每个作者都有自己的队列，通过作者id进行区分
+        Queue queue = new Queue("article_thumbup_" + article.getUserid(), true);
+        rabbitAdmin.declareQueue(queue);
+
+        //3 发消息到队里中
+        rabbitTemplate.convertAndSend("article_thumbup_" + article.getUserid(), articleId);
+
+
     }
 }
