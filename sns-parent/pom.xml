@@ -15,6 +15,7 @@
         <module>../sns-encrypt</module>
         <module>../sns-base</module>
         <module>../sns-notice</module>
+        <module>../sns-friend</module>
     </modules>
 
     <parent><!--父工程继承了springboot-parent，其他工程可以省略-->
