@@ -17,6 +17,7 @@
         <module>../sns-notice</module>
         <module>../sns-friend</module>
         <module>../sns-qa</module>
+        <module>../sns-spit</module>
     </modules>
 
     <parent><!--父工程继承了springboot-parent，其他工程可以省略-->
