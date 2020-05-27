@@ -20,6 +20,7 @@
         <module>../sns-spit</module>
         <module>../sns-sms</module>
         <module>../sns-search</module>
+        <module>../sns-config</module>
     </modules>
 
     <parent><!--父工程继承了springboot-parent，其他工程可以省略-->
