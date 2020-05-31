@@ -41,13 +41,13 @@ public class JwtUtil {
      * @param subject
      * @return
      */
-    public String createJWT(String id, String subject, String roles) {
+    public String createJWT(String id, String subject, String role) {
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
         JwtBuilder builder = Jwts.builder().setId(id)
                 .setSubject(subject)
                 .setIssuedAt(now)
-                .signWith(SignatureAlgorithm.HS256, key).claim("roles", roles);
+                .signWith(SignatureAlgorithm.HS256, key).claim("role", role);
         if (ttl > 0) {
             builder.setExpiration( new Date( nowMillis + ttl));
         }
