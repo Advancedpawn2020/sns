@@ -1,7 +1,7 @@
-package com.zrkworld.sns.friend.user.controller;
+package com.zrkworld.sns.user.controller;
 
-import com.zrkworld.sns.friend.user.pojo.Admin;
-import com.zrkworld.sns.friend.user.service.AdminService;
+import com.zrkworld.sns.user.pojo.Admin;
+import com.zrkworld.sns.user.service.AdminService;
 import entity.PageResult;
 import entity.Result;
 import entity.StatusCode;

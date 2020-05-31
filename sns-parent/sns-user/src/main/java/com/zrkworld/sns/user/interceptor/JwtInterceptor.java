@@ -1,4 +1,4 @@
-package com.zrkworld.sns.friend.user.interceptor;
+package com.zrkworld.sns.user.interceptor;
 
 import io.jsonwebtoken.Claims;
 import org.apache.commons.lang3.StringUtils;

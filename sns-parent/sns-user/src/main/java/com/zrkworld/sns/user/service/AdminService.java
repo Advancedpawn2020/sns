@@ -1,7 +1,7 @@
-package com.zrkworld.sns.friend.user.service;
+package com.zrkworld.sns.user.service;
 
-import com.zrkworld.sns.friend.user.dao.AdminDao;
-import com.zrkworld.sns.friend.user.pojo.Admin;
+import com.zrkworld.sns.user.dao.AdminDao;
+import com.zrkworld.sns.user.pojo.Admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

@@ -1,4 +1,4 @@
-package com.zrkworld.sns.friend.user.pojo;
+package com.zrkworld.sns.user.pojo;
 
 
 import javax.persistence.Entity;

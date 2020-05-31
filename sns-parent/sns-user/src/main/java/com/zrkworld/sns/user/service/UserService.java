@@ -1,7 +1,7 @@
-package com.zrkworld.sns.friend.user.service;
+package com.zrkworld.sns.user.service;
 
-import com.zrkworld.sns.friend.user.dao.UserDao;
-import com.zrkworld.sns.friend.user.pojo.User;
+import com.zrkworld.sns.user.dao.UserDao;
+import com.zrkworld.sns.user.pojo.User;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

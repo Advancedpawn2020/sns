@@ -1,6 +1,6 @@
-package com.zrkworld.sns.friend.user.config;
+package com.zrkworld.sns.user.config;
 
-import com.zrkworld.sns.friend.user.interceptor.JwtInterceptor;
+import com.zrkworld.sns.user.interceptor.JwtInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;

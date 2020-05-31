@@ -1,7 +1,7 @@
-package com.zrkworld.sns.friend.user.dao;
+package com.zrkworld.sns.user.dao;
 
 
-import com.zrkworld.sns.friend.user.pojo.Admin;
+import com.zrkworld.sns.user.pojo.Admin;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

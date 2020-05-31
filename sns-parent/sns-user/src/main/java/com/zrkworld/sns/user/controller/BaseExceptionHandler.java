@@ -1,4 +1,4 @@
-package com.zrkworld.sns.friend.user.controller;
+package com.zrkworld.sns.user.controller;
 import entity.Result;
 import entity.StatusCode;
 import org.springframework.web.bind.annotation.ControllerAdvice;
