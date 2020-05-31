@@ -9,18 +9,18 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>../sns-common</module>
-        <module>../sns-article</module>
-        <module>../sns-user</module>
-        <module>../sns-encrypt</module>
-        <module>../sns-base</module>
-        <module>../sns-notice</module>
-        <module>../sns-friend</module>
-        <module>../sns-qa</module>
-        <module>../sns-spit</module>
-        <module>../sns-sms</module>
-        <module>../sns-search</module>
-        <module>../sns-config</module>
+        <module>sns-common</module>
+        <module>sns-article</module>
+        <module>sns-user</module>
+        <module>sns-encrypt</module>
+        <module>sns-base</module>
+        <module>sns-notice</module>
+        <module>sns-friend</module>
+        <module>sns-qa</module>
+        <module>sns-spit</module>
+        <module>sns-sms</module>
+        <module>sns-search</module>
+        <module>sns-config</module>
     </modules>
 
     <parent><!--父工程继承了springboot-parent，其他工程可以省略-->
@@ -56,7 +56,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
+        <!-- devtools -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
