@@ -1,5 +1,7 @@
 package com.zrkworld.sns.article.controller;
 
+import com.zrkworld.sns.article.pojo.Column;
+import com.zrkworld.sns.article.service.ColumnService;
 import entity.PageResult;
 import entity.Result;
 import entity.StatusCode;
@@ -7,11 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.Map;
 
 /**
- * 控制器层
- * @author Administrator
+ * 专栏
+ * @author zrk
  *
  */
 @RestController
@@ -19,7 +22,7 @@ import java.util.Map;
 @RequestMapping("/column")
 public class ColumnController {
 
-	@Autowired
+	@Resource
 	private ColumnService columnService;
 	
 	
