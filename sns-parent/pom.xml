@@ -13,6 +13,9 @@
         <module>sns-article</module>
         <module>sns-user</module>
         <module>sns-encrypt</module>
+        <module>sns-eureka</module>
+        <module>sns-search</module>
+        <module>sns-sms</module>
         <module>sns-base</module>
         <module>sns-notice</module>
         <module>sns-friend</module>
