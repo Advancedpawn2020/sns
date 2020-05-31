@@ -1,0 +1,36 @@
+# spring cloud config 的远程配置,从git上取配置文件
+#spring:
+#  cloud:
+#    config:
+#      name: user
+#      profile: dev
+#      label: master
+#      uri: http://127.0.0.1:12000
+
+server:
+  port: 9008 #服务访问端口号
+spring:
+  application:
+    name: sns-user #服务名称
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver #服务连接的属性
+    url: jdbc:mysql://192.168.25.133:3306/sns_user?characterEncoding=utf-8
+    username: root
+    password: root
+  jpa:
+    database: MySQL
+    show-sql: true
+  redis:
+    host: 192.168.25.133
+  rabbitmq:
+    host: 192.168.25.133
+jwt:
+  config:
+    key: zrkworld #加盐
+    ttl: 3600000 #持续时间
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:6868/eureka/
+  instance:
+    prefer-ip-address: true
