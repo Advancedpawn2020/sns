@@ -1,0 +1,61 @@
+server:
+  port: 9013
+spring:
+  application:
+    name: sns-encrypt
+zuul:
+  routes:
+    sns-base: #基础服务
+      path: /base/** #配置请求URL的请求规则
+      serviceId: sns-base #指定Eureka注册中心中的服务id
+      strip-prefix: true #所有请求都进行转发
+      sentiviteHeaders:
+      customSensitiveHeaders: true #让zuul网关处理所有cookie和重定向
+    sns-article: #文章服务
+      path: /article/** #配置请求URL的请求规则
+      serviceId: sns-article #指定Eureka注册中心中的服务id
+      strip-prefix: true
+      sentiviteHeaders:
+      customSensitiveHeaders: true #让zuul网关处理所有cookie和重定向
+    sns-gathering: # 活动
+      path: /gathering/** # 配置请求URL的请求规则
+      serviceId: sns-gathering # 指定Eureka注册中心中的服务id
+      strip-prefix: true #所有请求都进行转发
+      sentiviteHeaders:
+      customSensitiveHeaders: true #让zuul网关处理所有cookie和重定向
+    sns-friend: #交友
+      path: /friend/** # 配置请求URL的请求规则
+      serviceId: sns-friend # 指定Eureka注册中心中的服务id
+      strip-prefix: true #所有请求都进行转发
+      sentiviteHeaders:
+      customSensitiveHeaders: true #让zuul网关处理所有cookie和重定向
+    sns-qa: #问答
+      path: /qa/** # 配置请求URL的请求规则
+      serviceId: sns-qa # 指定Eureka注册中心中的服务id
+      strip-prefix: true #所有请求都进行转发
+      sentiviteHeaders:
+      customSensitiveHeaders: true #让zuul网关处理所有cookie和重定向
+    sns-recruit: #招聘
+      path: /recruit/** # 配置请求URL的请求规则
+      serviceId: sns-recruit # 指定Eureka注册中心中的服务id
+      strip-prefix: true #所有请求都进行转发
+      sentiviteHeaders:
+      customSensitiveHeaders: true #让zuul网关处理所有cookie和重定向
+    sns-spit: # 吐槽
+      path: /spit/** # 配置请求URL的请求规则
+      serviceId: sns-spit # 指定Eureka注册中心中的服务id
+      strip-prefix: true #所有请求都进行转发
+      sentiviteHeaders:
+      customSensitiveHeaders: true #让zuul网关处理所有cookie和重定向
+    sns-user: # 用户
+      path: /user/** # 配置请求URL的请求规则
+      serviceId: sns-user   # 指定Eureka注册中心中的服务id
+      strip-prefix: true #所有请求都进行转发
+      sentiviteHeaders:
+      customSensitiveHeaders: true #让zuul网关处理所有cookie和重定向
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:6868/eureka/
+  instance:
+    prefer-ip-address: true
