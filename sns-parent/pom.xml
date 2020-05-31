@@ -16,6 +16,7 @@
         <module>sns-eureka</module>
         <module>sns-base</module>
         <module>sns-search</module>
+        <module>sns-sms</module>
         <module>sns-notice</module>
         <module>sns-friend</module>
         <module>sns-qa</module>
