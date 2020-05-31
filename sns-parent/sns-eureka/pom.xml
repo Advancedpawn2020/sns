@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>sns-parent</artifactId>
+        <groupId>com.zrkworld.sns</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <groupId>com.zrkworld</groupId>
+    <artifactId>eureka</artifactId>
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-netflix-eureka-server -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+            <version>2.2.2.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>com.zrkworld</groupId>
+            <artifactId>sns-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <!-- Spring Cloud Config客户端依赖 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+
+    </dependencies>
+    <!--配置一键远程部署并构建镜像的maven插件-->
+    <build>
+        <!-- 为当前工程起名称 -->
+        <finalName>sns</finalName>
+        <plugins>
+            <!-- spring boot的maven插件 -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!-- docker的maven插件，官网：https://github.com/spotify/docker‐maven‐plugin -->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.4.13</version>
+                <configuration>
+                    <!-- 做成镜像后镜像的名称 -->
+                    <imageName>192.168.25.133:5000/${project.artifactId}:${project.parent.version}</imageName>
+                    <!-- 基础镜像 -->
+                    <baseImage>jdk1.8</baseImage>
+                    <!-- 执行命令，打jar包 -->
+                    <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                    <dockerHost>http://192.168.25.133:2375</dockerHost>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
