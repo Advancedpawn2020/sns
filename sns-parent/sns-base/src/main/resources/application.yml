@@ -1,0 +1,22 @@
+server:
+  port: 9001    # 指定端口
+
+spring:
+  application:
+    name: sns-base   # 模块名
+  datasource:   # 配置数据源
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.25.133:3306/sns_user?characterEncoding=utf-8
+    username: root
+    password: root
+  jpa:      # 配置jpa
+    database: mysql
+    show-sql: true
+  rabbitmq:
+    host: 192.168.25.133
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:6868/eureka/
+  instance:
+    prefer-ip-address: true
