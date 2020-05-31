@@ -1,0 +1,23 @@
+server:
+  port: 9014 # 服务访问端口号
+spring:
+  application:
+    name: sns-notice #服务名称
+  datasource: # 数据库连接四大属性
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.25.133:3306/sns_notice?characterEncoding=utf-8
+    username: root
+    password: root
+  redis:
+    host: 192.168.25.133
+  rabbitmq:
+    host: 192.168.25.133
+  jpa:
+    database: mysql
+    show-sql: true
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:6868/eureka/
+  instance:
+    prefer-ip-address: true

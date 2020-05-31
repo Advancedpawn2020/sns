@@ -1,11 +1,10 @@
 package com.zrkworld.sns.article.controller;
 
-import com.zrkworld.sns.article.pojo.Column;
 import com.zrkworld.sns.article.service.ColumnService;
+import com.zrkworld.sns.article.pojo.Column;
 import entity.PageResult;
 import entity.Result;
 import entity.StatusCode;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
