@@ -1,30 +1,21 @@
 package com.zrkworld.sns.base.pojo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 
-@TableName("tb_label")
-public class Label {
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
 
-    //id
-    @TableId(type = IdType.INPUT)
+@Entity
+@Table(name = "tb_label")
+public class Label implements Serializable {
+    @Id
     private String id;
-
-    //标签名称
-    private String labelname;
-
-    //状态
-    private String state;
-
-    //使用数量
-    private int count;
-
-    //是否推荐
-    private String recommend;
-
-    //关注数
-    private int fans;
+    private String labelname;   // 标签名称
+    private String state;   // 状态
+    private Long count; // 使用数量
+    private Long fans;  // 关注数
+    private String recommend;   // 是否推荐
 
     public String getId() {
         return id;
@@ -50,12 +41,20 @@ public class Label {
         this.state = state;
     }
 
-    public int getCount() {
+    public Long getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(Long count) {
         this.count = count;
+    }
+
+    public Long getFans() {
+        return fans;
+    }
+
+    public void setFans(Long fans) {
+        this.fans = fans;
     }
 
     public String getRecommend() {
@@ -64,25 +63,5 @@ public class Label {
 
     public void setRecommend(String recommend) {
         this.recommend = recommend;
-    }
-
-    public int getFans() {
-        return fans;
-    }
-
-    public void setFans(int fans) {
-        this.fans = fans;
-    }
-
-    @Override
-    public String toString() {
-        return "Label{" +
-                "id='" + id + '\'' +
-                ", labelname='" + labelname + '\'' +
-                ", state='" + state + '\'' +
-                ", count=" + count +
-                ", recommend='" + recommend + '\'' +
-                ", fans=" + fans +
-                '}';
     }
 }
